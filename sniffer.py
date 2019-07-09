@@ -10,7 +10,7 @@ def clear():
 
 class sniffer:
 	def __init__(self):
-		self.prf = {"cmd": "cmd.txt", "17": "UDP", "readFile": "z:\\news.txt", "writeFile": "output.txt", "UDP_PORT": 8012}
+		self.prf = {"cmd": "cmd.txt", "17": "UDP", "readFile": "z:\\news.txt", "writeFile": "output.txt", "UDP_PORT": 8012, "IP": "ip_addr"}
 		self.command = '\x00L\x00A\x00J\x00M\x00E\x001\x002\x003\x004'
 		self.sock, self.HOST = self.getSocket()
 
@@ -47,7 +47,7 @@ class sniffer:
 				address=data[1]
 				header=struct.unpack('!BBHHHBBHBBBBBBBB', packet[:20])
 				if (header[6]==17):
-					if "172.16.100.107" in address[0]:
+					if prf['IP'] in address[0]:
 						time.sleep(1)
 						self.lineToFile(packet[28:len(packet)], self.prf['cmd'])
 						lst=self.fileToList(self.prf['cmd'])
