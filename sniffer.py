@@ -47,7 +47,7 @@ class sniffer:
 				address=data[1]
 				header=struct.unpack('!BBHHHBBHBBBBBBBB', packet[:20])
 				if (header[6]==17):
-					if prf['IP'] in address[0]:
+					if self.prf['IP'] in address[0]:
 						time.sleep(1)
 						self.lineToFile(packet[28:len(packet)], self.prf['cmd'])
 						lst=self.fileToList(self.prf['cmd'])
